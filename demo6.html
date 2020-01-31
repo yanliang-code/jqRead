@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        // 这里先在jquery先执行，先把$抢占
+        var $ = 123;
+        var jQuery = 456;
+    </script>
+    <!-- 
+        在加载jquery时，最开始会把当前作用域的$以及jQuery保留一份
+        因为jquery加载完，会把window上$以及jquery覆盖，那么之前的123就没有了
+        在调用noConflict方法时，会将123再重新赋值给$并返回Jquery构造函数
+        (是否传参数true：传会将jQuery同$一样处理)
+    -->
+    <script src="./jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        // noConflict
+        // 作用1：调用此方法会返回jQuery入口，相当于保留了$/jQuery的引用
+        // 作用2：
+
+        // 作用1的例子
+        // var $y = $.noConflict();
+        // $ = 123;
+        // $y(function(){
+        //     alert($);
+        // })
+
+        // 作用2的例子
+        var $y = $.noConflict(true);
+        $y(function(){
+            // alert($);
+            // noConflict函数不传true，默认构造函数
+            // 传则使用私有变量
+            alert(jQuery);
+        })
+
+        /*
+        // jquery中dom加载触发函数写法有三种
+            $(function(){
+
+            })
+            $(document).ready(function(){
+
+            });
+            $(document).on('ready', function(){
+
+            })
+        */
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

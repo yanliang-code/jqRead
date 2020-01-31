@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: red;
+        }
+    </style>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            $('#div1').click(function(){
+                // 两次animate --> 两次入队，每次都立刻出队
+                // $(this).animate({width:300}, 2000).animate({left:300}, 2000);
+                // 延迟两秒再出队
+                $(this).animate({width:300}, 2000).delay(2000).animate({left:300}, 2000);
+
+                // 指定元素上的队列中函数全部执行完，最终触发的成功调用
+                $(this).promise().done(function(){
+                    alert(1234);
+                })
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

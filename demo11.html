@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        var rmsPrefix = /^-ms-/;
+        var rdashAlpha = /-([\da-z])/gi;
+        function fcamelCase ( all, letter ) {
+            return letter.toUpperCase();
+        };
+        function camelCase( string ) {
+            // rmsPrefix = /^-ms-/   -ms-transform  ->  ms-transform
+            // rdashAlpha = /-([\da-z])/gi   获取-加数字或字母部分
+            // fcamelCase 回调函数
+            return string.replace( rmsPrefix, "ms-" ).replace( rdashAlpha, fcamelCase );
+        }
+
+        camelCase('margin-top');
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function (){
+            // 在将span的Jquery对象推入栈前，先将div的Jquery对象推入
+            // pushStack方法返回值为span的Jquery指向
+            // 红色背景色给span加上的
+            // end方法的调用者是span，所以返回的是栈中在span入栈前的div的Jquery对象
+            // 黄色背景色是给div加上的
+            // $('div').pushStack( $('span') ).css('background','red').end().css('background','yellow');
+
+            // $('div')获取4个dom元素，组装成Jquery对象divObject返回
+            // slice(1,3) 将divObject中第一和第二个dom元素取出放入数组array，
+            // 内部会调用pushStack将divObject、array依次放入栈中，最终返回array
+            // array为dom元素数组，调用Jquery工具方法css(内部应该处理了，dom和Jquery都兼容，现在只是猜测)，加红色背景
+            // end方法同上
+            // css方法同上
+            $('div').slice(1,3).css('background','red').end().css('color','blue');
+
+            var arr = ['a', 'b', 'c'];
+
+            arr = $.map(arr, function(elem, i) {
+                return elem + i;
+            })
+
+            console.log('arr==', arr);
+        })
+    </script>
+</head>
+<body>
+    <!-- <div>div</div>
+    <span>span</span> -->
+    <div>div</div>
+    <div>div</div>
+    <div>div</div>
+    <div>div</div>
+    <span>span</span>
+</body>
+</html>

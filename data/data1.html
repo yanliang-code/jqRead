@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // $("#div1").attr('name', 'hello');
+            // alert( $('#div1').attr('name') );
+            document.getElementById('div1').setAttribute('name', 'hello');
+            alert( document.getElementById('div1').getAttribute('name') );
+
+            // $("#div1").prop('name', 'hello');
+            // alert( $('#div1').prop('name') );
+            document.getElementById('div1')['name'] = 'hello';
+            alert( document.getElementById('div1')['name'] );
+
+            // 数据缓存  优势：用于设置大量数据
+            // 上面的两种方法，适合设置元素本身拥有的属性  不适合放大量数据
+            // $("#div1").data('name', 'hello');
+            // alert( $('#div1').data('name') );
+
+            /*
+                内存泄漏：js中大量对象互相引用，导致垃圾回收机制无法回收，内存居高不下
+                情况1：
+                    DOM元素与对象之间互相引用，大部分浏览器就会出现内存泄漏
+                    // var oDiv = document.getElementById('div1');
+                    // var obj = {};
+                    // oDiv.name = obj;
+                    // obj.age = oDiv;
+
+                jquery通过在元素1上设置自定义属性，属性对应的值不是对象，是一个固定的数字
+                ，元素1上所有通过data缓存的属性与对应值，都会以固定数字为key，{}为值存储
+                在cache对象中，{}中是调用data方法时的两个参数
+
+                dom元素上引用的不再是对象，是个固定数字（排除dom引用json对象的情况）
+                cache缓存对象中与dom建立关系的是那个固定数字，设置给dom的json对象就直接与
+                固定数字建立映射即可
+                这样就不会出现dom引用json对象，json对象引用dom
+            */
+
+            /*
+            var obj = {name: 'hello'};
+            // 调用以下任意一个方法后无法修改对象的属性值
+            // obj.preventExtensions();
+            // Object.freeze(obj);
+            obj.name = 'hi';
+            alert( obj.name);
+            */
+
+            /*
+            var obj = {name: 'hello'};
+            //给obj设置属性值，执行后的obj为{name: 'hello', 0: {}}
+            // 由于get方法return是{}，所以obj变化如此
+            // 由于没有set方法，导致接下来的赋值操作无法进行(这样就可以防止修改对象属性的了)
+            Object.defineProperty(obj, 0, {
+                get:function(){
+                    return {}
+                }
+            })
+            alert(obj[0]);
+            obj[0] = 123;
+            alert(obj[0]);
+            */
+
+            // $('#div1').get(0) 将jquery对象转dom对象
+            // dataset获取data-这类的数据
+            alert( $('#div1').get(0).dataset.yl);
+            // alert( $('#div2').get(0).dataset.ylAll);
+
+            /*
+            $('#div1').data('name', 'hello');
+            $('#div1').data('age', 30);
+            // data-这类的数据，jquery也会认为是缓存数据
+            console.log( $('#div1').data() );
+            */
+
+            $('#div1').data('nameAge', 'hi');
+            $('#div1').data('name-age', 'hello');
+            console.log( $('#div1').data() );
+        })
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+    <!-- <div id="div1" data-yl="yl"></div> -->
+    <!-- <div id="div2" data-yl-all="yl-all"></div> -->
+</body>
+</html>

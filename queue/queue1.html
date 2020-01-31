@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div1{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: red;
+        }
+    </style>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            /*
+            // 每个动作逐个操作，每个操作都是setInterval
+            // 正常js是异步的，每个动作中的setInterval都会同时进行
+            // jquery中如何实现动作逐个操作的呢？
+
+            // 使用queue来实现的多异步处理
+            // deferred也可以对异步进行处理，但是不适合维护大量异常函数
+            $('#div1').animate({width:300}, 2000);    
+            $('#div1').animate({height:300}, 2000);
+            $('#div1').animate({left:300}, 2000);
+
+            */
+
+            /*
+            // 先变宽，再移动
+            $('#div1').click(function(){
+                $(this).animate({width:300}, 2000).animate({left:300}, 2000);
+            })
+            */
+
+            /*
+            // 先变宽，就不再移动了
+            $('#div1').click(function(){
+                // 入队
+                $(this).animate({width:300}, 2000).queue('fx', function(){
+
+                }).animate({left:300}, 2000);
+            })
+            */
+
+            /*
+            $('#div1').click(function(){
+                // 'fx'默认的，可以省略不写
+                $(this).animate({width:300}, 2000).queue('fx', function(next){
+                    // 出队
+                    // $(this).dequeue('fx');
+                    // 简单写法  有一个参数next
+                    next();
+                }).animate({left:300}, 2000);
+            })
+            */
+
+            // $('#div1').click(function(){
+            //     $(this).animate({width:300}, 2000).queue('fx', function(next){
+            //         $(this).css('height', 300);
+            //         next();
+            //     }).animate({left:300}, 2000);
+            // })
+            
+            // 利用animate的回调也可以达到上面的效果
+            // 缺点：当animate回调内是定时器时，无法控制定时器与后面的向左移动执行顺序，只能同时进行
+            // $('#div1').click(function(){
+            //     $(this).animate({width:300}, 2000, function(){
+            //         $(this).css('height', 300);
+            //     }).animate({left:300}, 2000);
+            // })
+            $('#div1').click(function(){
+                $(this).animate({width:300}, 2000).queue(function(next){
+                    // 这个可以控制什么时候出队的，出队的时候就是执行后续操作的时候
+                    // 保证异步过程可变成同步
+                    var that = this;
+                    var timer = setInterval(function(){
+                        that.style.height = that.offsetHeight + 1 + 'px';
+                        if(that.offsetHeight == 200){
+                            next();
+                            clearInterval(timer);
+                        }
+                    }, 30);
+                }).animate({left:300}, 2000);
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="div1"></div>
+</body>
+</html>

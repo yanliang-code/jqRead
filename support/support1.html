@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            for (var key in $.support) {
+                $('body').append('<div>' + key + ':' + $.support[key] + '<div');
+            }
+            // 由于getElementById指定了通过id取dom元素，所以不需要加#
+            // jquery内部会通过一些判断来决定通过哪些底层api获取dom元素，所以需要加#来让其区别
+            var oDiv = document.getElementById('div1');
+            var jDiv = $('#div1');
+            // oDiv.onfocus = function(){
+            // 此事件支持冒泡，不过只有IE下支持
+            oDiv.onfocusin = function(){
+                alert(123);
+            }
+
+            // 原生js克隆使用cloneNode()
+            // jquery克隆使用clone()
+            // 统一所有浏览器呈现同一个效果：support.clearCloneStyle
+            var div = $('<div>');
+            div.css('backgroundColor', 'red');
+            div.clone().css('backgroundColor', '');
+            alert( div.css('backgroundColor') );
+
+            /*
+            怪异模式：设置 box-sizing 属性为 border-box
+                盒模型的宽度设定100px，border、padding设置完，都是在100px内的，
+                最外层的100是不会变，变得宽度是内容
+                
+            正常模式：不设置默认为box-sizing:content-box;
+                盒模型的宽度设置100px，其实是设置的内容100px，border、padding设置
+                不会影响100px的内容，是在100px外再扩展
+
+                width:100px; border:10px solid red; padding:10px;
+                最终 div 容器的实际宽度为100px(width)+2*10px*(padding)+2*10px(border)=140px
+            */
+        })
+        
+    </script>
+</head>
+<body>
+    <div id="div1">
+        <input type="text" />
+    </div>
+</body>
+</html>

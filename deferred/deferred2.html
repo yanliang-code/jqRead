@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        function aaa(){
+            var dfd = $.Deferred();
+            dfd.resolve();
+            return dfd;
+        }
+
+        function bbb(){
+            var dfd = $.Deferred();
+            dfd.resolve();
+            return dfd;
+        }
+        // 等待多个延时对象相应都发布成功、失败、进行中信号，才会触发相应done、fail、progress
+        // 参数必须是延迟对象，否则就不考虑那个不是延迟对象的函数，都不考虑的情况下，就直接触发done函数
+        // when中参数都成功，才会触发done
+        // when中参数只要有一个失败，就会触发fail
+        $.when(aaa(), bbb()).done(function(){
+            // aaa、bbb函数的返回值，会作为参数返回到done触发的函数（arguments）
+            alert('成功');
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

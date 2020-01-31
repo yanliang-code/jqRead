@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        // Callbacks入参:
+        // once   memory   unique    stopOnFalse
+        function aaa(){
+            alert(1);
+        }
+        function bbb(){
+            alert(2);
+        }
+        function ccc(){
+            alert(3);
+        }
+        // 默认不传参数时，执行几次fire，调用几次list中函数
+        // 1.once:传值后，执行fire几次都只触发一次
+        /*
+        var cb = $.Callbacks("once");
+        cb.add(aaa);
+        cb.add(bbb);
+        cb.add(ccc);
+
+        cb.remove(bbb)
+
+        cb.fire();
+        cb.fire();
+        */
+
+        // 默认不传参数时，fire时只会将在执行此语句前放入list中的函数执行
+        // 2.memory:传值后，会将在执行fire会将再它之前之后所有放入list中的函数都执行
+        /*
+        var cb = $.Callbacks("memory");
+        cb.add(aaa);
+        cb.fire();
+        cb.add(bbb);
+        */
+
+        // 默认不传参数时，fire时只会将在执行此语句前放入list中的函数执行(执行两次相同函数)
+        // 3.unique:传值后，会将在执行fire时相同函数只执行一次
+        /*
+        var cb = $.Callbacks("unique");
+        cb.add(aaa);
+        cb.add(aaa);
+        cb.fire();
+        */
+
+        // 默认不传参数时，fire时只会将在执行此语句前放入list中的函数执行
+        // 4.stopOnFalse:传值后，会将在执行fire时,list中函数若返回false，list中后面的函数不再执行
+        /*
+        function stopAAA(){
+            alert(1);
+            return false;
+        }
+        function stopBBB(){
+            alert(2);
+        }
+        var cb = $.Callbacks("stopOnFalse");
+        cb.add(stopAAA);
+        cb.add(stopBBB);
+        cb.fire();
+        */
+
+
+        // 四个入参可以任意组合
+        /* */
+        var cb = $.Callbacks("once memory");
+        // 加入list队列
+        cb.add(aaa);
+        // 遍历list并调用其中的函数,由于传入once memory参数，list赋值空数组
+        cb.fire();
+        // 在add时，放入list后，发现memory参数，直接调用fire函数，list继续赋值空数组
+        cb.add(bbb);
+        // !fired和stacke都为false，无法触发fire方法
+        cb.fire();
+       
+
+        /*
+        function x(param){
+            alert('x=='+param);
+        }
+        function y(param){
+            alert('y=='+param);
+        }
+
+        var cb = $.Callbacks();
+        cb.add(x);
+        cb.add(y);
+        // fire参数可以传到队列中的函数内
+        cb.fire('fireParams');
+        */
+
+        /*
+        var mmmFlag = true;
+        function mmm(){
+            alert(1);
+            // 加个开关，只让其触发一次
+            if(mmmFlag){
+                // 再弹出1后fire，没有立即触发再继续弹1 再弹2（其实会一直弹1）
+                // 实际现象是弹1、2  再弹1、2
+                cb.fire();
+                mmmFlag = false;
+            }
+        }
+        function nnn(){
+            alert(2);
+        }
+        var cb = $.Callbacks();
+        cb.add(mmm);
+        cb.add(nnn);
+
+        cb.fire();
+        */
+
+
+        // function test(){
+            // 0：参数一  1：参数二 ....
+        //     console.log(arguments);
+        // }
+        // test([aaa, bbb])
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

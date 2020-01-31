@@ -1,0 +1,50 @@
+// data中的实例方法
+Data.prototype = {
+    // 给dom元素上加唯一标识，并返回唯一标识对应的值
+	key: function( owner ) 
+    // 在指定元素上设置缓存数据
+	set: function( owner, data, value )
+    // 获取指定元素上缓存的数据（传入key，就会获取缓存对象对应key的值）
+	get: function( owner, key )
+    // 通过参数判断调用set或get方法（入口）
+	access: function( owner, key, value )
+    // 移除指定元素上缓存的数据（传入key，就去除缓存对象对应key的值）
+	remove: function( owner, key )
+    // 判断指定元素是否有缓存数据
+	hasData: function( owner )
+    // 删除指定元素在cache中的缓存数据(1：{})
+	discard: function( owner )
+};
+
+// 扩展数据缓存相关的工具方法
+jQuery.extend({
+
+    // 判断是否可以创建私有key的传入值
+	acceptData: Data.accepts,
+
+	// 判断指定元素是否有缓存数据
+	hasData: function( elem ) 
+
+    // 设置或获取指定元素的缓存数据
+	data: function( elem, name, data ) 
+
+    // 移除指定元素上缓存的数据（传入key，就去除缓存对象对应key的值）
+	removeData: function( elem, name ) 
+
+    // 猜测是内部使用的，data_priv新new的Data对象，里面维护的数据也是自己的
+	_data: function( elem, name, data ) 
+
+    _removeData: function( elem, name ) 
+
+});
+
+// 扩展数据缓存相关的实例方法
+jQuery.fn.extend({
+    // 设置或获取指定元素集合的缓存数据（融入了data-数据的处理）
+    data: function( key, value )
+
+    // 遍历元素调用移除指定key
+	removeData: function( key ) 
+
+});
+    

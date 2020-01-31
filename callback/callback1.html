@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width= , initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        /*
+        function aaa(){
+            alert(1);
+        }
+        function bbb(){
+            alert(2);
+        }
+        function ccc(){
+            alert(3);
+        }
+        // 类似观察者模式
+        // 简单原理：list存储函数，fire就是for循环list后按个执行
+        var cb = $.Callbacks();
+        cb.add(aaa);
+        cb.add(bbb);
+        cb.add(ccc);
+
+        cb.fire();
+
+        // fire与监听事件类似
+        document.addEventListener('click', function(){ alert(1); }, false);
+        document.addEventListener('click', function(){ alert(2); }, false);
+        document.addEventListener('click', function(){ alert(3); }, false);
+        */
+
+        /*
+        // jquery中callback模块就是解决不同作用域下函数的统一管理
+        function aaa(){
+            alert(1);
+        }
+
+        (function(){
+            function bbb(){
+                alert(2);
+            }
+        })();
+
+        aaa();
+        // bbb在立即执行函数中，作用域也在那里，外边无法访问到
+        bbb();
+        */
+
+        /*
+        var cb = $.Callbacks();
+        function aaa(){
+            alert(1);
+        }
+        cb.add(aaa);
+
+        (function(){
+            function bbb(){
+                alert(2);
+            }
+            cb.add(bbb);
+        })();
+        
+        cb.fire();
+        */
+
+        Callbacks入参:
+        once
+        Callbacks
+        unique
+        stopOnFalse
+
+        // 返回值
+        (method) jQuery.Callbacks(options: any): {
+            add: (...args: any[]) => ...;
+            remove: (...args: any[]) => ...;
+            has: (fn: any) => boolean;
+            empty: () => ...;
+            disable: () => ...;
+            disabled: () => boolean;
+            lock: () => ...;
+            locked: () => boolean;
+            fireWith: (context: any, args: any) => ...;
+            fire: (...args: any[]) => ...;
+            fired: () => boolean;
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        console.log('$==', $.makeArray);
+        console.log('$()==', $());
+
+        /*
+            jQuery.fn = jQuery.prototype = {
+                jquery: core_version,
+	            constructor: jQuery,
+                init: function( selector, context, rootjQuery ) {}
+            }
+        */
+
+        // 构造函数
+        function a(){}
+        // 一个函数被创建完，js会自动在函数的原型赋值constructor属性
+        // a.prototype.constructor = a;
+        // 这种单个赋值，是在有constructor属性基础上再添加，不会影响constructor指向
+        a.prototype.name = 'hello';
+        // 这种是直接覆盖了，constructor也被覆盖了，指向赋值的对象的构造函数
+        // a.prototype ={
+        //     name:'hello'
+        // }
+        var a1 = new a();
+        // 实例化对象的constructor属性指向构造函数
+        alert(a1.constructor);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

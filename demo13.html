@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        // $(function(){
+        //     function show(){
+        //         alert(this);
+        //     }
+
+        //     $('input:eq(0)').click( $.proxy(show, window) );
+        //     $('input:eq(1)').click(function(){
+        //         // 解除第一个input框的绑定，但是之前绑定的是jQuery的工具方法
+        //         // 这个时候就需要guid给show函数加上标识，才能找到它并解除绑定
+        //         $('input:eq(0)').off();
+        //     });
+        // })
+
+        // function show(n1, n2){
+        //     alert(n1);
+        //     alert(n2);
+        //     alert(this);
+        // }
+        // // 函数名()
+        // // $.proxy(show, document)(3, 4);
+        // // $.proxy(show, document, 3, 4)();
+        // $.proxy(show, document, 3)(4);
+
+
+        var obj = {
+            show: function(){
+                alert(this);
+            }
+        };
+        // $(document).click( $.proxy(obj.show, obj));
+        $(document).click( $.proxy(obj, 'show')); //简写方法 调obj下的show方法并this指向obj
+    </script>
+</head>
+<body>
+    <input type="button" value="点击" />
+    <input type="button" value="解除绑定" />
+</body>
+</html>

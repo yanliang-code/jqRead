@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        // 延迟对象（基于回调callbacks开发的）
+        // jQuery.extend({
+        //     Deferred:function(){},
+        //     when:function(){}
+        // })
+        
+        // 通过回调实现的先弹1、再弹2
+        /*
+        var cb = $.Callbacks();
+        setTimeout(function(){
+            alert(1);
+            cb.fire();
+        }, 1000)
+        cb.add(function(){
+            alert(2);
+        });
+        */
+
+        // 通过延迟对象实现的先弹1、再弹2
+        /*
+        var dfd = $.Deferred();
+        setTimeout(function(){
+            alert(1);
+            dfd.resolve();
+        }, 1000)
+        dfd.done(function(){
+            alert(2);
+        });
+        */
+
+        /*
+        $.ajax({
+            url:'xxx.php',
+            success:function(){
+                alert('成功');
+            },
+            error:function(){
+                alert('失败');
+            }
+        })
+        // 简写版
+        $.ajax('xxx.php').done(function(){ alert('成功'); }).fail(function(){ alert('失败'); });
+        */
+
+        // [ "resolve", "done", jQuery.Callbacks("once memory"), "resolved" ],
+        // [ "reject", "fail", jQuery.Callbacks("once memory"), "rejected" ],
+        // [ "notify", "progress", jQuery.Callbacks("memory") ]
+
+        /*
+        // 成功、失败触发一次就够了，进行中可以多次触发，用于控制进度
+        var dfd = $.Deferred();
+        setInterval(function(){
+            alert(1);
+            // resolve对应的done只会触发一次（once）
+            // dfd.resolve();
+            // dfd.reject();
+            // notify对应的progress会多次触发
+            dfd.notify();
+        }, 1000);
+
+        dfd.done(function(){
+            alert('成功');
+        }).fail(function(){
+            alert('失败');
+        }).progress(function(){
+            alert('进行中');
+        })
+        */
+
+        $(function(){
+            /*
+            // 创建有记忆的队列
+            var cb = $.Callbacks("memory");
+            // 延时内部触发fire方法，由于js不会阻塞进程，add方法先执行，将函数放入list中
+            // 延时结束后，调用fire方法，会将list中函数调用执行
+            setTimeout(function(){
+                alert(1111);
+                cb.fire();
+            }, 1000);
+            cb.add(function(){
+                alert('aaa');
+            })
+            // 在点击按钮时，调用add方法，若队列有memory参数，则会在add方法中直接调用fire方法
+            // 使得add中的方法会立刻执行
+            $('#input1').click(function(){
+                cb.add(function(){
+                    alert('bbbb');
+                })
+            })
+            */
+
+            // 第一次延迟触发，以后立刻触发
+            // 延迟函数中按 resolve <=> fire  done <=> add 理解即可
+            // var dfd = $.Deferred();
+            // setTimeout(function(){
+            //     alert(1111);
+            //     dfd.resolve();
+            // }, 1000);
+            // dfd.done(function(){
+            //     alert('aaa');
+            // })
+            // $('#input1').click(function(){
+            //     dfd.done(function(){
+            //         alert('bbbb');
+            //     })
+            // })
+
+            /*
+            // 由于resolve需要延时1s触发，晚于reject触发，导致resolve触发无效
+            // 正常情况下，函数内声明的延迟对象的状态应该由函数内部进行修改，
+            // 但是，目前在函数外部也可以修改
+            function aaa(){
+                var dfd = $.Deferred();
+                setTimeout(function(){
+                    dfd.resolve();
+                }, 1000);
+                // 解决方法：Deferred对象中包含resolve、reject、notify修改状态的三种方法，返回不包含此三种方法的promise对象即可
+                // return dfd;
+                // 
+                return dfd.promise();
+            }
+            var newDfd = aaa();
+            newDfd.done(function(){
+                alert('成功');
+            }).fail(function(){
+                alert('失败');
+            })
+
+            newDfd.reject();
+            */
+
+            /*
+            var dfd = $.Deferred();
+            setTimeout(function(){
+                // alert(1111);
+                dfd.resolve('hello!');
+                // dfd.reject();
+            }, 1000);
+            // dfd.always(function(){
+            //     alert('aaa');
+            // })
+            // then可以接受三个参数 成功、失败、进行中（第一个参数必填）
+            dfd.then(function(){
+                // alert(1);
+                alert(arguments[0]);
+            }, function(){
+                alert(2);
+            }, function(){
+                alert(3);
+            })
+            */
+
+            var dfd = $.Deferred();
+            setTimeout(function(){
+                dfd.resolve('hi');
+            }, 1000);
+            // 正常resolve直接触发done，现在pipe过了一遍手（我也没看懂）
+            var newPromise = dfd.pipe(function(){
+                return arguments[0] + ' yl';
+            })
+            newPromise.done(function(){
+                alert( arguments[0] );
+            })
+        })
+    </script>
+</head>
+<body>
+    <input id="input1" type="button" value="点击" />
+</body>
+</html>

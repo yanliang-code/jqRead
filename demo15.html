@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // 通过jquery对象调用方法获取宽度成功（隐藏的dom元素）
+            // 原理：加上此两种样式visibility: hidden; position: absolute;并且将display改为block
+            // 这样用户在页面上看不到，但它在页面上实际存在，可以获取到它宽高等属性
+            alert( $('#div1').width() );
+            // 通过原生dom元素获取宽度失败（隐藏的dom元素）
+            alert( $('#div1').get(0).offsetWidth );
+        })
+    </script>
+</head>
+<body>
+    <div id="div1" style="width: 100px; height: 100px; background-color: red; display: none;"></div>
+</body>
+</html>

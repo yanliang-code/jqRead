@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        window.onload = function(){
+            var aDiv = document.getElementsByTagName('div');
+            console.log('aDiv===', aDiv);
+    
+            console.log('$.makeArray aDiv===', $.makeArray(aDiv));
+
+            var a = 'qqqqq';
+            console.log('$.makeArray(a)===', $.makeArray(a));
+
+            var object = '{"name":"peter", "age":19}';
+            console.log('$.makeArray(object)===', $.makeArray(object));
+            
+            var object1 = {name:"peter", age:19};
+            console.log('$.makeArray(object1)===', $.makeArray(object1));
+
+            var str = 'hello';
+            // str向{length:0}合并
+            console.log( $.makeArray(str, {length:0}));
+
+            // merge
+            // if    : $.merge(['a', 'b'], ['c', 'd']);
+            // eles  : $.merge(['a', 'b'], {0:'qq',1:'ww'});
+
+            // console.log( $.merge({0:'a', 1:'b', length:2}, {0:'c', 1:'d'})); 走else
+
+            var arr = [1, 2, 3, 4];
+            // 遍历目标
+            // 回调函数 elem：每个元素   i：下标
+            // 返回值符合条件  true：过滤剩下的  false：过滤掉的
+            var grepResult = $.grep(arr, function(elem, i){
+
+                return i >2;
+            }, true);
+            console.log('grepResult===', grepResult);
+
+            var arrMqp = [1, 2, 3, 4];
+            var mapResult = $.map(arr, function(elem, i){
+                return elem + 1;
+            });
+            console.log('mapResult===', mapResult);
+        }
+    </script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>

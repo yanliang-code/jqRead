@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        /*
+        // jquery中dom加载触发函数写法有三种
+            $(function(){
+
+            })
+            $(document).ready(function(){
+
+            });
+            $(document).on('ready', function(){
+
+            })
+        */
+        // 不适用holdReady不能保证a.js代码先于alert（2）执行
+
+        // 先hold住，不让其回调dom加载完的函数
+        $.holdReady(true);
+        $.getScript('a.js', function(){
+            // 等待a.js全部加载完并回调后，放开
+            $.holdReady(false);
+        });
+
+        $(function(){
+            alert(2);
+        })
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

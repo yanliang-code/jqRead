@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        // $(""), $(null), $(undefined), $(false)
+        // $('#div1') $('.box') $('div1') $('#div1 div.box') $('<li>hello')  #id或字符串
+        // $('<li>') $('<li>2</li>') 创建标签
+        // $(this)  $(document)
+        // $(function(){}) 
+        // $([])  $({})
+        $(function (){
+            //返回的Jquery对象 {0:div, 1:div, 2:div, length:3 prevObject: , context: ,selector: }
+            console.log( $('div') ); 
+             //返回数组 [div, div, div] 
+            console.log( $('div').toArray() ); 
+            console.log( $('div').get() ); 
+            console.log( $('div').get(0) ); 
+        })
+    </script>
+</head>
+<body>
+    <div></div>
+    <div></div>
+    <div></div>
+</body>
+</html>

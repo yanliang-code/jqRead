@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-2.0.3/jquery-2.0.3.js"></script>
+    <!-- <script>
+        function test(){
+            // 执行此句话可以让在函数内声明赋值的变量，作用域为全局
+            // jQuery.globalEval("var newVar = true");
+            // 作用域为函数test内
+            var newVar = true;
+        }
+        test();
+        console.log('newVar====', newVar);
+    </script> -->
+
+
+    <!-- <script>
+        function test(){
+            eval("var newVar = true");
+            // alert(newVar); //可以正常获取
+        }
+        test();
+         alert(newVar); // 无法获取
+    </script> -->
+    <!-- <script>
+        function test(){
+            window.eval("var newVar = true");
+            alert(newVar); // 可以正常获取
+        }
+        test();
+        // alert(newVar); // 可以正常获取
+    </script> -->
+    <script>
+        function test(){
+            // 此处jEval赋值的是window.eval
+            var jEval = eval;
+            jEval("var newVar = true");
+            // alert(newVar); // 可以正常获取
+        }
+        test();
+        alert(newVar); // 可以正常获取
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

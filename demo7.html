@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+
+    <script>
+        // 只会等待DOM加载就回调(原生中的DOMContentLoaded事件)
+        // $(function(){
+
+        // })
+        // 会等待文件都加载完进行回调（DOM以及img中src的图片）
+        window.onload = function(){
+            var a = {};
+            // 只有null和undefined取属性是会报错,中断执行语句
+            console.log(a.length);
+            alert(111);
+        }
+    </script>
+</head>
+<body>
+    <div>aaaa</div>
+    <img src=""/>
+</body>
+</html>

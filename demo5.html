@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="./jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        // $.extend()
+        // $.fn.extend()
+        // $: jqeury函数  $(): jquery对象
+
+        /*
+        // 1.当只写一个对象自变量时，JQ中扩展插件的形式（插件是可有可无的）
+        // 扩展插件
+        $.extend({})
+        console.log('$==', $);
+        // 扩展工具方法
+        $.extend({
+            aaa:function(){
+                alert(1);
+            },
+            bbb:function(){
+                alert(2);
+            }
+        })
+
+        // 扩展JQ实例方法
+        $.fn.extend({
+            aaa:function(){
+                alert(3);
+            },
+            bbb:function(){
+                alert(4);
+            }
+        })
+
+        // 调用扩展后的工具方法
+        $.aaa();
+        $.bbb();
+        // 调用扩展后的JQ实例方法
+        $().aaa();
+        $().bbb();
+
+        // 连等的原因：一个extend函数实现函数和函数原型两种情况的扩展
+        // $.extend() --> this --> $ --> this.aaa --> $.aaa()
+        // $.fn.extend() --> this --> $.fn --> this.aaa --> $.fn.aaa()
+
+    */
+    
+    /*
+        // 2.当写多个对象自变量时，后面的对象都扩展到第一个对象上
+        var a = {};
+        $.extend(a, {age:18}, {name:'peter'});
+
+        console.log('a===', a);
+    */
+    
+    /*
+        // 3.深拷贝 与 浅拷贝
+        var a = {};
+        var b = {name:{age:30}};
+
+        $.extend(a, b);
+
+        a.name.age = 20
+
+        alert(b.name.age); //20 修改a的值改变了b的值（浅拷贝）
+
+        var c = {};
+        var d = {name:{age:30}};
+
+        $.extend(true, c, d); //需要在第一个参数传入true
+
+        c.name.age = 20
+
+        alert(d.name.age); //30 修改a的值未改变了b的值（深拷贝）
+
+    */
+
+        // var a = {};  
+        // console.log($.extend(a, {name:a}));
+
+        var a = {name:{job:'it'}}; var b = {name:{age:18}};
+		$.extend(true, a, b);
+    </script>
+</head>
+<body>
+</body>
+</html>
