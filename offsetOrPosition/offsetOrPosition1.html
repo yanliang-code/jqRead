@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        /* #div2{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin: 200px;
+            // absolute fixed relative都可以开启定位效果
+            position: relative;
+        }
+        #div3{
+            width: 100px;
+            height: 100px;
+            position: relative;
+            left: 50px;
+            top: 50px;
+            background-color: yellow;
+        } */
+
+        #div2{
+            width: 200px;
+            height: 200px;
+            background-color: red;
+            margin: 200px;
+            /* absolute fixed relative都可以开启定位效果 */
+            position: relative;
+            overflow: hidden;
+        }
+        #div3{
+            width: 100px;
+            height: 100px;
+            /* 使用margin，子元素不完全在父元素内，需要使用overflow: hidden; */
+            margin: 50px;
+            background-color: yellow;
+        }
+    </style>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            /*
+            // offset()：获取元素与屏幕间的距离，与此元素的祖先节点是否有定位无关(相对于整个页面的,包含滚动距离)
+            // div3元素左侧与浏览器左边框距离
+            console.log( $('#div3').offset().left ); //250
+
+            // position():获取指定元素与有定位效果的祖先元素的距离,无定位的祖先元素，结果就与offset()一致
+            console.log( $('#div3').position().left ) //50
+            */
+
+            // console.log( $('#div3').offset().left ); //250
+
+            // console.log( $('#div3').position().left ) //0 不会计算margin值，估计是使用left属性
+
+            // -------------------------
+            // 设置值
+
+            // offset设置值是相对于浏览器屏幕的，若指定元素没有开启定位，jq内部会自动加上
+            // 最终指定元素上的行内样式 -> position: relative; top: -50px; left: -50px;（配套css样式为第二套）
+            // $('#div3').offset({left:200, top:200});
+
+            // $('#div3').offset(function(i, opt){
+            //     console.log(i);
+            //     console.log(opt);
+            //     return {left:200, top:200};
+            // });
+            
+            // 可以直接设置滑动条的位置(animate中可以设置滑动的运动效果)
+            $(window).scrollTop(500)
+
+            $(document).click(function(){
+                // 获取滑动后位置距离整个页面顶部的距离
+                // 也可作用于某个元素，不过需要这个元素有滚动效果
+                alert( $(window).scrollTop() );
+            })
+        })
+    </script>
+</head>
+<body style="height:2000px;">
+    <div id="div2">
+        <div id="div3"></div>
+    </div>
+</body>
+</html>

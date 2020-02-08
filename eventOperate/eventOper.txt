@@ -1,0 +1,96 @@
+//对外接口调用的内部方法
+jQuery.event = {
+    global: {},     事件的全局属性
+    add,            绑定事件
+    remove,         移除事件
+    trigger,        主动触发
+    dispatch,       分发事件的具体操作
+    handlers,       函数执行顺序的操作
+    props:'',       JQ中共享原生JS的event属性
+    fixHooks: {},   收集event兼容的集合
+    keyHooks: {     键盘的event兼容
+        props:[],
+        filter,
+    },
+    mouseHooks: {   鼠标的event兼容
+        props:[],
+        filter,
+    },
+    fix,        event对象的兼容处理
+    special:{   特殊事件处理
+        load:{},
+        focus:{
+            trigger,
+            delegateType:''
+        },
+        blur:{
+            trigger,
+            delegateType:''
+        },
+        click:{
+            trigger,
+            _default,
+        },
+        beforeunload:{
+            beforeunload,
+        },
+        //后面通过遍历添加的属性
+        mouseenter: {
+            delegateType: 'mouseover',
+		    bindType: 'mouseover',
+            handle，
+        },
+	    mouseleave:{
+            delegateType: 'mouseover',
+		    bindType: 'mouseover',
+            handle，
+        },
+        focusin:{
+
+        },
+        focusout:{
+
+        }
+    },
+    simulate,   focusin的模拟操作(trigger dispatch)
+},
+jQuery.removeEvent,
+//构造函数(jq中event对象结构)
+jQuery.Event,
+jQuery.Event.prototype={
+    isDefaultPrevented: returnFalse,
+	isPropagationStopped: returnFalse,
+	isImmediatePropagationStopped: returnFalse,
+	preventDefault,
+    stopPropagation,
+    stopImmediatePropagation,
+}
+//对外接口
+jQuery.fn.extend({
+    on,
+    one,
+    off,
+    trigger,
+    triggerHandler,
+})
+
+/*
+    ("blur focus focusin focusout load resize scroll unload click dblclick " +
+	"mousedown mouseup mousemove mouseover mouseout mouseenter mouseleave " +
+	"change select submit keydown keypress keyup error contextmenu").split(" ")
+*/
+//7283 部分dom事件在此处定义
+
+//对外接口
+//用于在jq对象后方加上.click() .mouseover()等操作
+
+//对外接口
+jQuery.fn.extend({
+    hover,
+    hover,
+    unbind,
+    delegate,
+    delegate
+})
+
+delegate -> on -> add -> dispatch -> fix -> special -> handlers

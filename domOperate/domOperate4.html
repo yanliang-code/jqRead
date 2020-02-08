@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // add方法是将匹配span标签的jq对象集合，放入匹配div标签jq对象集合中
+            // 这样合并后的集合入栈 调用css方法
+            // $('div').add('span').css('background', 'red');
+
+            // find()返回在div中符合span要求的jq集合
+            // addBack()取到当前栈所在位置的下一层（end()效果），内部调用add方法，入栈
+            // 在此时调用方法，作用于不仅仅是div层，是div层和span层集合
+            // $('div').find('span').css('color', 'blue').addBack().css('border', '2px red solid');
+
+            // 获取指定元素的父级元素的jq对象
+            // $('span').parent().css('border', '2px red solid');
+            // 参数：增加过滤效果
+            // $('span').parent('.box').css('border', '2px red solid');
+
+            // parents()获取指定元素的祖先元素(指定元素->html元素，不包括指定元素，包括html元素)
+            // $('span').parents().css('border', '2px red solid');
+            // 指定上限(不传参数相当于'html'效果)
+            // $('span').parents('body').css('border', '2px red solid');
+
+            // 一个参数：与parents()相似，但包括上限的body元素
+            // $('span').parentsUntil('body').css('border', '2px red solid');
+            // 两个参数：第二参数是过滤条件，在span -> body范围内符合过滤条件的入栈
+            // $('span').parentsUntil('body', 'div').css('border', '2px red solid');
+
+            // 
+            $('span').siblings().css('background', 'red'); 
+
+            $('body').children().css('background', 'red'); 
+            // 只有元素子节点
+            console.log($('body').children());
+            // 所有子节点(文本、元素、注释等等)
+            console.log($('body').contents());
+
+            /*
+                // 下面方法只会过滤条件，过滤条件只支持字符串类型
+                jQuery.each({
+                    parent,         当前元素的父元素
+                    parents,        当前元素的所有父元素
+                    parentsUntil,   parents方法增加上限参数
+                    next,           当前元素上一个节点
+                    prev,           当前元素下一个节点
+                    nextAll,        当前元素下面的所有节点
+                    prevAll,        当前元素上面的所有节点
+                    nextUntil,      nextAll方法增加下限参数
+                    prevUntil,      prevAll方法增加上限参数
+                    siblings,       排除自己的所有兄弟元素
+                    children,       指定元素的所有子元素（类型只有元素）
+                    contents,       指定元素的所有子元素（所有类型）
+                })
+            */
+        })
+    </script>
+</head>
+<body>
+    <!-- <div>div</div>
+    <span>span</span> -->
+
+    <!-- <div>div
+        <span>span</span>
+    </div>
+    <div>qqq</div> -->
+
+    <!-- <div>div<p>p<span>span</span></p></div> -->
+    <div>div</div>
+    <span>span</span>
+    <p>p</p>
+    <div>div2</div>
+    <!-- <span>span2</span> -->
+</body>
+</html>

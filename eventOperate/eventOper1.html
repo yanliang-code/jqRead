@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // 此种方法时也是内部调用on实现，不过是第二个参数为null，不进行事件委托
+            // $('#div2').click(function(){
+            //     alert(234);
+            // })
+
+            // on函数对外最多四个参数，对内最多五个
+            // $('#div2').on('click', function(){
+            //     alert(234);
+            // })
+
+            // ev：点击的事件对象，三个入参情况下，第二个参数可在回调函数中获取
+            // $('#div2').on('click', {name:'hello'}, function(ev){
+            //     alert(ev.data.name);
+            // })
+
+
+            /*
+                a、不使用委托事件的情况下，建议使用简写方式、on，不建议使用bind的方式
+                    其实，内部bind与简写方式都是调用的on方法
+                b、使用委托事件的情况下，使用delegate,理解的话，使用on效果一样
+            */
+
+
+            /*
+            // 委托事件：减少元素事件的个数，减少性能浪费
+            // 事件处理加在父级元素上
+            // 事件触发加在子级元素上
+            $('ul').delegate('li', 'click', {name:'hello'}, function(){
+                $(this).css('background', 'red');
+            });
+            // 页面效果同上
+            $('ul').on('click', 'li',  {name:'hello'}, function(){
+                $(this).css('background', 'red');
+            })
+
+            总结：delegate内部就是调用on来实现的
+            */
+
+
+            /*
+            // $('#div2').on('click', function(){
+            //     alert(234);
+            // })
+            // $('#div2').on('mouseover', function(){
+            //     alert(567);
+            // })
+
+            // 一次绑定多个事件
+            $('#div2').on({
+                'click': function(){
+                    alert(234);
+                },
+                'mouseover': function(){
+                    alert(567);
+                }
+            })
+            */
+            $('#div2').one('click', function(){
+                alert(234);
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="div2">aaaa</div>
+    <ul>
+        <li>2222x</li>
+        <li>3333x</li>
+        <li>4444x</li>
+    </ul>
+</body>
+</html>

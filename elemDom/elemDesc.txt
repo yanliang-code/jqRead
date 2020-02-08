@@ -1,0 +1,31 @@
+实例方法
+jQuery.fn.extend({
+	attr
+    removeAttr
+    prop
+    removeProp
+    addClass
+    removeClass
+    toggleClass
+    hasClass
+    val
+})
+内部使用（工具方法）
+jQuery.extend({
+    valHooks: {
+        option:{},
+        select:{}
+    },
+    attr,
+	removeAttr,
+    attrHooks:{
+		type: {}
+    },
+    propFix:{
+
+    },
+    prop,
+    propHooks:{
+        tabIndex:{}
+    }
+})

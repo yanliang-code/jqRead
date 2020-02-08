@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- <script src="../jquery-2.0.3/jquery-2.0.3.js"></script> -->
+    <script>
+        /*
+            $(function(){
+                $('#div2').click(function(){
+                alert(2344)
+                $(this).off('click');
+                })
+                // $('#div2').click(function(){
+                //    alert(66666)
+                // })
+                $('#div2').trigger('click');
+                
+                $('#div2').on('show', function(){
+                alert(2344)
+                })
+                $('#div2').on('hide', function(){
+                alert(666)
+                })
+                // 自定义事件，只能手动触发
+                $('#div2').trigger('hide');
+            })
+        */
+        
+        // ---------------------------------------------------------------------
+        // 由于jq中事件的最底层函数是add、remove、trigger，以下是简易功能的实现（核心思想）
+        window.onload = function(){
+            var oDiv = document.getElementById('div2');
+            function aaa(){
+                alert(222);
+            }
+            function bbb(){
+                alert(333);
+            }
+            function ccc(){
+                alert(444);
+            }
+            add(oDiv, 'show', aaa);
+            add(oDiv, 'show', bbb);
+            // remove(oDiv, 'show');
+            remove(oDiv, 'show', aaa);
+            // remove(oDiv, 'click', aaa);
+            // 主动触发自定义函数
+            trigger(oDiv, 'show');
+        };
+
+        // 入参：绑定对象、事件类型、触发函数
+        function add(obj, types, fn){
+            // 维护数据,将事件的引用存在dom对象的listeners上
+            // listeners有值的情况下，用本身的；没有，就赋值空对象
+            obj.listeners = obj.listeners || {};
+            // 有值赋值新值，没有赋值空数组（防止第一次没有初始化）
+            obj.listeners[types] = obj.listeners[types] || [];
+            // 将新函数添加到数组中
+            obj.listeners[types].push(fn);
+            //原生js绑定事件方法
+            obj.addEventListener(types, fn, false);
+        }
+
+        function remove(obj, types, fn){
+            // 维护的自定义事件需要手动移除
+            var arr = obj.listeners[types] || [];
+            // 移除指定事件类型中的指定触发函数
+            if(fn){
+                for (var index = 0; index < arr.length; index++) {
+                    if(arr[index] == fn){
+                        arr.splice(index, 1);
+                    }
+                }
+            // 移除指定事件类型的所有触发函数
+            }else{
+                // 直接写arr不能删除成功
+                delete obj.listeners[types];
+            }
+            //原生js解绑事件方法
+            obj.removeEventListener(types, fn, false);
+        }
+
+        function trigger(obj, types){
+            var datas = obj.listeners[types] || [];
+            var len = datas.length;
+            // 需要维护维护一个数组，主动触发时，循环调用
+            for(var i = 0; i < len; i++){
+                datas[i]();
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="div2">aaaa</div>
+    <ul>
+        <li>2222x</li>
+        <li>3333x</li>
+        <li>4444x</li>
+    </ul>
+    <input id="input2"/>
+</body>
+</html>

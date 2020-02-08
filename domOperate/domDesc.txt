@@ -1,0 +1,93 @@
+
+一些变量
+
+//对外接口(筛选部分)
+jQuery.fn.extend({
+	find,
+    has,
+    not,
+    filter,
+    is,
+    closest,
+    index,
+    add,
+    addBack,
+})
+function sibling( cur, dir ) {
+
+}
+//对外接口
+// 下面方法只会过滤条件，过滤条件只支持字符串类型
+jQuery.each({
+    parent,         当前元素的父元素
+    parents,        当前元素的所有父元素
+    parentsUntil,   parents方法增加上限参数
+    next,           当前元素上一个节点
+    prev,           当前元素下一个节点
+    nextAll,        当前元素下面的所有节点
+    prevAll,        当前元素上面的所有节点
+    nextUntil,      nextAll方法增加下限参数
+    prevUntil,      prevAll方法增加上限参数
+    siblings,       排除自己的所有兄弟元素
+    children,       指定元素的所有子元素（类型只有元素）
+    contents,       指定元素的所有子元素（所有类型）
+})
+jQuery.extend({
+    filter,
+    dir,
+    sibling,
+})
+
+function winnow( elements, qualifier, not ) {
+
+}
+
+一些变量
+
+//对外接口
+jQuery.fn.extend({
+    text,
+    append,
+    prepend,
+    before,
+    after,
+    remove,
+    empty,
+    clone,
+    html,
+    replaceWith,
+    detach,
+    domManip,
+})
+
+jQuery.each({
+	appendTo: "append",
+	prependTo: "prepend",
+	insertBefore: "before",
+	insertAfter: "after",
+	replaceAll: "replaceWith"
+)}
+
+jQuery.extend({
+    clone,
+    buildFragment,
+    cleanData,
+    _evalUrl,
+)}
+
+//一些内部工具方法
+function manipulationTarget( elem, content ) {}
+function disableScript( elem ) {}
+function restoreScript( elem ) {}
+function setGlobalEval( elems, refElements ) {}
+function cloneCopyEvent( src, dest ) {}
+function getAll( context, tag ) {}
+function fixInput( src, dest ) {}
+
+//对外接口
+jQuery.fn.extend({
+    wrapAll,
+    wrapInner,
+    wrap,
+    unwrap
+})

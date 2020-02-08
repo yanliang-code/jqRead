@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script>
+        document.onclick = function(ev){
+            // 向下滑动后，pageY值会变大
+            // clientY一致是可视区域的距离
+            alert(ev.pageY + '-====-' +ev.clientY);
+        }
+    </script>
+</head>
+<body style="height: 2000px;">
+    
+</body>
+</html>

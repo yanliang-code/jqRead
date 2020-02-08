@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <!-- 
+    jQuery.event.special:{   特殊事件处理
+        load:{},
+        focus:{
+            trigger,
+            delegateType:''
+        },
+        blur:{
+            trigger,
+            delegateType:''
+        },
+        click:{
+            trigger,
+            _default,
+        },
+        beforeunload:{
+            beforeunload,
+        },
+        //后面通过遍历添加的属性
+        mouseenter: {
+            delegateType: 'mouseover',
+            bindType: 'mouseover',
+            handle，
+        },
+        mouseleave:{
+            delegateType: 'mouseover',
+            bindType: 'mouseover',
+            handle，
+        },
+        focusin:{
+
+        },
+        focusout:{
+    }
+
+     -->
+     <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+     <script>
+         $(function(){
+            //  IEll下
+            //  $('#div2').on('focus', function(){
+            //      alert('div2');
+            //  })
+            //  $('#input2').on('focus', function(){
+            //      alert('input2');
+            //  })
+            //  $('#input2').trigger('focus');
+            
+            /*
+            // 正常focus是不允许冒泡的，因为事件是加在div上的，事件源在input上
+            // 不冒泡是不可以出现弹出框的
+            // 由于jq内部用focusin模拟的focus
+            $('#div2').delegate('#input2', 'focus', function(){
+                 alert('input2');
+             })
+            */
+
+            // $('#r2').on('click', function(){})
+            // $('#r2').trigger('click')
+
+            // $('a').on('click', function(){})
+            // $('a').trigger('click')
+
+            // 关闭页面，提示文字
+            // $(window).on('beforeunload', function(){
+            //     return '2234';
+            // });
+
+            // focusin只有ie支持，点击input框会被div捕获到
+            // 兼容方法：将focusin看做自定义事件，使用trigger手动触发
+            $('#div2').on('focusin', function(){
+                 alert('input2');
+             })
+         })
+     </script>
+</head>
+<body>
+    <div id="div2">
+        <input type="text" id="input2"/>
+    </div>
+    <input type="checkbox" id="r2" />
+    <a href="http://www.baidu.com">qqqq</a>
+</body>
+</html>

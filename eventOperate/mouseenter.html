@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div2{
+            width: 400px;
+            height: 400px;
+            background-color: red;
+        }
+        #div3{
+            width: 200px;
+            height: 200px;
+            background-color: yellow;
+        }
+    </style>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            $('#div2').on('mouseenter', function(){
+                alert('mouseenter');
+            })
+            $('#div2').on('mouseleave', function(){
+                alert('mouseleave');
+            })
+        })
+        /*
+        window.onload = function(){
+            var oDiv2 = document.getElementById('div2');
+            var oDiv3 = document.getElementById('div3');
+            var oSpan2 = document.getElementById('span2');
+            oDiv2.onmouseover = function(ev){
+                var ev = ev || window.event;
+                // 触发事件的dom对象
+                var a = this;
+                // 移入前所处的元素
+                var b = ev.relatedTarget;
+                if( !elContains(a, b) && a!=b ){
+                    oSpan2.innerHTML += '2'; 
+                }else{
+                    console.log('过滤情况');
+                }
+            }
+            oDiv2.onmouseout = function(ev){
+                var ev = ev || window.event;
+                // 触发事件的dom对象
+                var a = this;
+                // div2移出事件
+                var b = ev.relatedTarget;
+                if( !elContains(a, b) && a!=b ){
+                    oSpan2.innerHTML += '3'; 
+                }
+            }
+            // oDiv2.onmouseenter = function(ev){
+            //     oSpan2.innerHTML += '2'; 
+            // }
+            // oDiv2.onmouseleave = function(ev){
+            //     oSpan2.innerHTML += '3'; 
+            // }
+        };
+        function elContains(a, b){
+            return a.contains ? a!=b && a.contains(b) : !!(a.compareDocumentPosition(b) & 16);
+        }
+        */
+
+        /*
+            a、外部-->红色区域-->外部：23
+            b、外部-->红色区域-->黄色区域：232            
+            情况b：红色-->黄色，离开红色会onmouseout事件，到黄色区域后，由于黄色区域在
+                   红色内并且黄色区域触发onmouseover事件并冒泡，外层红色区域会捕获冒泡
+                   导致也会触发onmouseover事件
+            改为使用不会冒泡的onmouseenter、onmouseleave(只有IE下能使用)
+            jq中使用onmouseover模拟onmouseenter效果，在嵌套元素切换下触发的事件不执行
+
+            !elContains(a, b) && a!=b 
+            onmouseover --> a:移入的元素  b:移入前所处的元素
+            l、body-->div2
+                a:div2  b:body      true && true
+            2、div2-->div3
+                a:div2  b:div2      true && false
+            3、div3-->div2
+                a:div2  b:div3      false && true
+        */
+    </script>
+</head>
+<body>
+    <div id="div2">
+        <div id="div3"></div>
+    </div>
+    <span id="span2"></span>
+</body>
+</html>

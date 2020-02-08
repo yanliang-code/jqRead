@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div2{
+            width: 100px;
+            height: 100px;
+            background-color: red;
+            padding: 10px;
+            border: 1px blue solid;
+            margin: 5px;
+        }
+    </style>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        // dom加载完并且外部文件加载完会回调的函数
+        $(window).load(function(){
+            // var div = $('iframe').get(0).contentWindow.document.getElementById('div4');
+            //无论iframe是否为隐藏，其内部的div都可以获取到block（不存在隐藏是无法获取内部div的display）
+            // console.log( window.getComputedStyle(div, null).display ); 
+        })
+        // dom加载完会回调的函数
+        $(function(){
+            // width()  height()  innerWidth()  innerHeight()  outerWidth()  outerHeight() 
+            // $('#div2').width() -> $('#div2').css('width')
+            // console.log( $('#div2').width() ); //100    width
+            // console.log( $('#div2').innerWidth() ); //120   width + 2 * padding
+            // console.log( $('#div2').outerWidth() ); //122   width + 2 * padding + 2 * border
+            // console.log( $('#div2').outerWidth(true) ); //132   width + 2 * padding + 2 * border + 2 * margin
+
+            // width是内容的宽度
+            // console.log( $('#div2').width(200) ); //  width = 200
+            // console.log( $('#div2').innerWidth(200) ); // width = 200 - 2 * padding
+            // console.log( $('#div2').outerWidth(200) ); // width = 200 - 2 * padding - 2 * border
+            // console.log( $('#div2').outerWidth(200, true) ); // width = 200 - 2 * padding - 2 * border - 2 * margin
+
+            // 隐藏的元素原生js无法获取属性，jq可以
+            // console.log( $('#div2').get(0).offsetWidth ); // 0
+            // console.log( $('#div2').width() ); // 168
+            // console.log( $('#div2').css('width') ); // 168px
+
+            // 可视区域高度
+            // console.log( $(window).height() );
+            // 整个页面高度
+            // console.log( $(document).height() );
+        });
+        
+    </script>
+</head>
+<body>
+    <!-- <iframe src="cssOperate1.html"></iframe> -->
+    <!-- <iframe src="cssOperate1.html" style="display: none;"></iframe> -->
+    <div id="div2" style="display: none;box-sizing: border-box;">div2</div>
+</body>
+</html>

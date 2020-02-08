@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // 将每个span外层都包裹div元素
+            // $('span').wrap('<div>');
+            // $('span').wrap(function(){
+            //     return '<div>';
+            // });
+            // 将匹配的所有span元素包裹在一个div元素内（可能会影响dom结构）
+            // 若多个span元素的同级元素有其他元素，jq内部就把他移动到与div同级
+            // $('span').wrapAll('<div>');
+            // 内部遍历span调用wrapAll方法，每个调用后效果与wrap一致
+            // $('span').wrapAll(function(){
+            //     return '<div>';
+            // });
+
+            // 每个span元素内增加div元素，span的内容移动到div内
+            // $('span').wrapInner('<div>');
+            // 移除span的父级元素（无参数、若父级元素为body，不会被移除）
+            // $('span').unwrap();
+
+            // $('span').wrapAll('<div><p></p></div>');
+
+        })
+    </script>
+</head>
+<body>
+    <!-- <span>span</span>
+    <span>span</span>
+    <p>p</p>
+    <span>span</span> -->
+    <span>
+        <p>p2</p>
+        <p>p3</p>
+    </span>
+</body>
+</html>

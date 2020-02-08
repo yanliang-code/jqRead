@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // 在匹配上div元素的jq集合中过滤类选择器是div2的jq对象
+            // $('div').filter('.div2').css('border', '1px red solid');
+            // 过滤时，没有条件，就没有匹配为空
+            // $('div').filter().css('border', '1px red solid');
+            // 过滤类选择器不是div2的jq对象
+            // $('div').not('.div2').css('border', '1px red solid');
+            // 在匹配上div元素的jq集合中过滤
+            // 子级元素是li元素的jq对象
+            $('div').has('li').css('border', '1px red solid');
+        })
+    </script>
+</head>
+<body>
+    <div class="div2">div2<span>span<li></li></span>span</div>
+    <div>div3<li></li></div>
+</body>
+</html>

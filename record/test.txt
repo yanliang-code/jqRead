@@ -1,7 +1,8 @@
 1.工具方法：构建Jquery库的最底层（见demo1）
 2.实例方法：在最底层的上一层的位置（有些方法是直接调用的工具方法）
 3.jquery通用思想：目标元素为多个时，设置属性，全部元素生效；获取属性，第一个元素生效
-
+4.平时频繁是的，也就是对外接口，一般都挂载在jQuery.fn上
+5.先了解对外暴露的API用法的区别，再捋顺API内部调用函数之间的关系，将最底层的函数理解清楚
 
 JQ中：拷贝继承
 JS：
@@ -27,7 +28,8 @@ jQuery总览
     (3653, 3797) queue()：队列管理
     (3803, 4299) attr() prop() val() addClass()等：对元素属性的操作
     (4300, 5128) on() trigger()：事件操作的相关方法
-    (5140,6057) css()：样式的操作
+    (5140,6057) DOM操作：添加 删除 获取 包装 DOM筛选
+    (6058,6620) css()：样式的操作
     (6621, 7854) 提交的数据和ajax()：ajax() load() getJson()
     (7855, 8584) animate()：运动的方法
     (8585, 8792) offset()：位置和尺寸的方法
@@ -36,3 +38,45 @@ jQuery总览
 })()
 
 
+l、margin === true || value === true ? "margin" : "border"
+先判断？前为true还是false，在执行三目运算符 --> || 优先级大于 三目
+
+2、&& > || > 三目
+
+3、 var _parent = {name:'parent'};
+    var _child = {name:'child', parent:_parent};
+    _parent["child"] = _child;
+    上述 _parent 与 _child互相引用，会导致内存泄漏
+
+4： 
+    a || b  a或者a隐式转换为true，直接返回a值
+    a && b  a或者a隐式转换为false，直接返回a值
+
+5.提示：
+exports 仅仅是 module.exports 的一个引用。在 factory 内部给 exports 重新赋值时，
+并不会改变 module.exports 的值，而是把 exports 的引用改了，exports 与 module.exports 无关。
+如果，给 exports 的属性赋值，也就是给 module.exports 赋值，这样是可以的
+
+6.AMD、CMD规范  https://www.cnblogs.com/leftJS/p/11073481.html
+
+CommonJs 是服务器端模块的规范，Node.js采用了这个规范。
+根据CommonJS规范，一个单独的文件就是一个模块。加载模块使用require方法，该方法读取一个文件并执行，最后返回文件内部的exports对象。
+var math = require('math');
+math.add(2, 3);
+第二行math.add(2, 3)，在第一行require('math')之后运行，因此必须等math.js加载完成。也就是说，如果加载时间很长，整个应用就会停在那里等。您会注意到 require 是同步的。
+CommonJS 加载模块是同步的，所以只有加载完成才能执行后面的操作。像Node.js主要用于服务器的编程，加载的模块文件一般都已经存在本地硬盘，所以加载起来比较快，
+不用考虑异步加载的方式，所以CommonJS规范比较适用。但如果是浏览器环境，要从服务器加载模块，这是就必须采用异步模式。所以就有了 AMD  CMD 解决方案。
+
+AMD
+中文名是异步模块定义的意思。它是一个在浏览器端模块化开发的规范
+第一个参数[module]，是一个数组，里面的成员就是要加载的模块；第二个参数callback，则是加载成功之后的回调函数。如果将前面的代码改写成AMD形式，就是下面这样：
+require(['math'], function (math) {
+　　math.add(2, 3);
+});
+math.add()与math模块加载不是同步的，浏览器不会发生假死。所以很显然，AMD比较适合浏览器环境。目前，主要有两个Javascript库实现了AMD规范：require.js和curl.js。
+    优点：适合在浏览器环境中异步加载模块。可以并行加载多个模块。 
+    缺点：提高了开发成本，并且不能按需加载，而是必须提前加载所有的依赖。
+
+CMD:
+    优点： 同样实现了浏览器端的模块化加载。 可以按需加载，依赖就近。
+    缺点： 依赖SPM打包，模块的加载逻辑偏重。

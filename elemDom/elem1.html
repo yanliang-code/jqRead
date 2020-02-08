@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            /*
+            // attr:两个参数为设置html元素的属性，一个参数为获取属性
+            $('#div2').attr('title', 'hello');
+            alert( $('#div2').attr('title') );
+            */
+
+            // $('#div2').prop('title', 'hello');
+            // alert( $('#div2').prop('id') );
+
+            /*
+                // 原生js中html元素设置属性通过两种方法
+                //     setAtrribute()
+                //     . 或 []
+
+                // 原生js三种情况下dom元素设置属性
+                var oDiv = document.getElementById('div2');
+                // oDiv.setAttribute('title', 'hello');
+                // oDiv.title = 'hello';
+                oDiv['title'] = 'hello';
+
+                // 总结：
+                    l.jquery中attr调用setAttribute方法，prop使用其余两种方式
+                    2.prop无法将属性赋值到element元素，但可以获取通过jquery设置上的定义属性值
+                      若html上写的自定义属性，通过prop是无法获取的，是undefined
+                      attr可以赋值，并且可以获取自定义属性值
+                    3.获取a链接上的href属性，prop获取的是全路径，attr获取的是属性值
+                    4.removeProp删除自带或自定义属性都失败，removeAttr都可以成功删除
+            */
+            
+            // $('#div2').attr('yl', 'yl');
+            // alert( $('#div2').prop('yl') );
+            // alert( $('#div2').attr('yl') );
+
+            // alert( $('#a2').prop('href') ); // file:///E:/Jquery/elemDom/yl.com
+            // alert( $('#a2').attr('href') ); // yl.com
+
+            // $('#div2').removeAttr('yl'); //删除属性成功
+            // alert( $('#div2').attr('yl') );
+            // $('#div2').removeProp('yl'); // 删除属性失败
+            // alert( $('#div2').prop('yl') );
+
+
+            // alert( document.getElementById('div2').getAttribute );    
+            // alert( $('input').attr('checked') ); //checked
+            // alert( $('input').prop('checked') ); //true
+
+            // $('input').attr('checked', 'checked'); 
+            //原生中setAtrribute写成上述方式也可赋值，下面这种情况就不可以成功，但是jquery中可以，由于boolHook的存在
+            // $('input').attr('checked', true); 
+            
+            // 支持一次移除指定元素的多个属性
+            // $('#div2').removeAttr('id yl class');
+            // 原生removeAttribute不支持一次性移除多个属性
+            document.getElementById('div2').removeAttribute('id yl class');
+        });
+    </script>
+</head>
+<body>
+    <div id="div2" yl='yl' class="222">aaaaaaaaaaaaa</div>
+    <a id="a2" href='yl.com'>qqqqq</a>
+    <input type="checkbox">
+    <input type="text">
+    <input type="text">
+    <!-- tabIndex点击tab键切换光标的先后顺序 -->
+    <!-- <input type="text" tabIndex="3">
+    <input type="text" tabIndex="2"> -->
+</body>
+</html>

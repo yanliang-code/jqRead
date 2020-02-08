@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        /*
+            调用on函数都经历了什么
+            a、on函数内对不同入参进行相应处理，最终调用add
+            b、add函数内拼凑数据，将元素与数据对应关系存储在缓存数据data中，最终调用dispatch
+            c、dispatch函数内
+        */
+
+        $(function(){
+            $('#div2').on('click', function(a){
+                alert(222)
+            })
+            $('#div2').on('click', function(){
+                alert(333)
+            })
+            // 前三个on都是将缓存数据绑定到div上
+            // 所以三个调用on，最终调用add打印出来的elemData是一致的
+            $('#div2').on('mouseenter', function(){
+                alert(444)
+            })
+            // 这个是将缓存数据绑定到body上
+            // 由于是委托事件，所以数组arr下delegateCount属性值有所改变 为1
+            // 这里的缓存数据elemData内的events对应的数组中只有一个元素
+            $('body').on('click', '#div2', function(){
+                alert(666)
+            })
+
+            /*
+            jq内部缓存数据机制data中维护的：
+                elemData:{
+                    events:{
+                        'click':[  //数组arr下还有delegateCount(委托个数)、length属性
+                            {
+                                // 若浏览器可正常运行，则与origType内容一致；
+                                // 若不可以，内容是其他可以模拟指定事件类型的类型
+                                type: "click",
+                                // 调用on函数，绑定事件类型
+                                origType: "click",
+                                data: undefined,
+                                // 在元素上添绑定的函数（普通函数）
+                                handler: ƒ (a),
+                                // 第几个在元素上添加的事件，唯一标识
+                                guid: 1,
+                                //一般事件：undefined  具体字符串是委托事件，若为委托事件，不管第几个绑定的，都会在数组的第一个元素上
+                                selector: undefined, 
+                                // 一般事件：undefined  委托事件：false   委托事件指定的子元素是span:first伪元素：true
+                                needsContext: undefined,
+                                // 命名空间，可以在事件类型后指定命名空间，主动触发时也可以指定触发相应命名空间的事件
+                                // 例如：$('#div2').on('click.aaa', function(){ alert(333) }) --> $('#div2').trigger('click.aaa')
+                                namespace: ""
+                            }, 
+                            {}
+                        ], 
+                        'mouseover':[{}]
+                    },
+                    // 真正的事件函数
+                    handle:function(e){}
+                }
+            */
+        })
+    </script>
+</head>
+<body>
+    <div id="div2">aaaaa</div>
+</body>
+</html>

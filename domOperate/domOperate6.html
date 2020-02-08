@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+
+            /*
+            // 原生js中script标签已经插入span标签内，但没有执行(/需要转义)
+            // $('span').get(0).innerHTML = '<script>alert(222)<\/script>';
+            // jq中script标签已经插入span标签内，并且会执行代码弹框
+            // $('span').html('<script>alert(222)<\/script>');
+
+            // 原生js中tr需要插入table中，直接插入span内，原生js认为不符合规范，最终dom结构中不存在tr
+            // $('span').get(0).innerHTML = '<tr></tr>';
+            // jq中可以正常插入
+            // $('span').html('<tr></tr>');
+
+            // $('span').html('<input />');  //<span><input></span>
+            // $('span').html('<div/>');        //<span><div></div></span>
+            */
+            
+            /*
+            // 接收三种的入参
+            // $('span').append(oDiv);
+            // $('span').append($('div'));
+            // $('span').append('<div></div>');
+            $('span').append(function(){
+                // return啥添加啥
+                return 'hello';
+            });
+            */
+            // 第一个span内部是移动来的
+            // 第二三个span内部是克隆div来的(克隆复选框时有问题，需要单独处理)
+            // $('span').append( $('div') );
+
+            // 替换
+            // $('span').replaceWith( $('div') );
+
+            // 在div元素中插入span元素，返回div相关的jq对象集合
+            // $('div').append( $('span') );
+            // span元素插入到div元素中,返回span相关的jq对象集合
+            // console.log( $('span').appendTo( $('div') ) );
+        })
+    </script>
+</head>
+<body>
+    <!-- <span></span>
+    <span></span>
+    <span></span> -->
+    <!-- <script>alert(222)</script> -->
+    <!-- <script type="true">alert(222)</script> -->
+
+    <!-- <span>span<span>span</span></span>
+    <div>div</div> -->
+    <span>span</span>
+    <span>span</span>
+    <div>div</div>
+</body>
+</html>

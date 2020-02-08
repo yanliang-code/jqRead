@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // $('li').css('background', 'red');
+
+            // 过滤条件是作用于ul后代元素，返回值是匹配上的li，
+            // css的效果是作用在匹配上的ul后代元素上
+            $('ul').find('li').css('background', 'red');
+
+            // 过滤条件是作用于ul后代元素，返回值是匹配上的ul，
+            // css的效果是作用在ul上的
+            // $('ul').has('li').css('background', 'red');
+        })
+    </script>
+</head>
+<body>
+    <ul>
+        <li></li>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ul>
+    <ol>
+        <li></li>
+        <li></li>
+        <li></li>
+    </ol>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            $('#div2').on('click', function(){
+                alert(2222)
+            })
+            // 默认是冒泡机制，span点击事件触发，会向父级元素冒泡，
+            // 父级元素div捕获到，触发了它的相应的事件
+            $('#span2').on('click', function(ev){
+                alert('aaaa')
+                // 只会阻止冒泡
+                // ev.stopPropagation();
+                // 阻止所有其他将要触发的函数
+                ev.stopImmediatePropagation()
+            })
+            $('#span2').on('click', function(ev){
+                alert('bbbb')
+            })
+        })
+    </script>
+</head>
+<body>
+    <div id="div2">
+        2222
+        <span id="span2">aaaa</span>        
+    </div>
+</body>
+</html>

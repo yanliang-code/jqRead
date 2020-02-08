@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            $('#input2').focus(function(){
+               $(this).css('background', 'red');
+            })
+
+            // $('#input2').trigger('focus');
+            $('#input2').triggerHandler('focus');  //不会触发事件的默认行为：光标聚焦
+        })
+    </script>
+</head>
+<body>
+    <div id="div2">aaaa</div>
+    <ul>
+        <li>2222x</li>
+        <li>3333x</li>
+        <li>4444x</li>
+    </ul>
+    <input id="input2"/>
+</body>
+</html>

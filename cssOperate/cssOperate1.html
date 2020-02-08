@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        #div3{
+            color: blue;
+            background: blue;
+            width: 200px;
+        }
+        #div4{
+            display: "";
+        }
+    </style>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // console.log( $('#div2').get(0).style.color ); //red
+            // console.log( $('#div3').get(0).style.color ); //空
+
+            // console.log( window.getComputedStyle($('#div2').get(0), null).color ); //rgb(255, 0, 0)
+            // console.log( window.getComputedStyle($('#div3') .get(0), null).color ); //rgb(0, 0, 255)
+            
+            // console.log( $('#div2').get(0).style.background ); //brown
+            // console.log( $('#div2').get(0).style.backgroundColor ); //brown
+
+            // console.log( window.getComputedStyle($('#div3') .get(0), null).background ); //rgb(0, 0, 255) none repeat scroll 0% 0% / auto padding-box border-box
+            // console.log( window.getComputedStyle($('#div3') .get(0), null).backgroundColor ); //rgb(0, 0, 255)
+
+            /*
+            区别一：
+                style.color:只能获取内联样式
+                window.getComputedStyle：可以获取最终作用到元素的样式
+            区别二：
+                style.color:可以设置内联样式
+                window.getComputedStyle：只能获取，无法设置
+            区别三：
+                style.color:获取复合样式时，是否具体不要求
+                window.getComputedStyle：获取复合样式时，最好写成指定的属性名
+            */
+
+            // console.log( $('#div2').css('color') ); //rgb(255, 0, 0)
+            // console.log( $('#div2').css('color', 'yellow') ); //init [div#div2, context: document, selector: "#div2"]
+            // console.log( $('#div3').css('color') ); //rgb(0, 0, 255)
+            // console.log( $('#div3').css('color', 'yellow') ); //init [div#div2, context: document, selector: "#div2"]
+            
+            // console.log( $('#div3').css(['color', 'backgroundColor', 'width']) ); //返回有三个属性的对象
+
+            // $('#div3').css({'width':300, 'height':300});
+            // $('#div3').css('width',function(){
+            //     return 500;
+            // });
+            /*
+                获取：一个属性字符串、多属性组成的数组
+                设置：一对属性与属性值、多个属性与属性值组成的对象、一对属性与函数
+            */
+            /*
+                css获取：jq使用jQuery.css来调用curCSS再调window.getComputedStyle
+                css设置：jq使用jQuery.style来修改元素的style
+            */
+
+            // 行内样式加display：none
+            // $('#div4').hide();  
+            // 行内样式加display：block
+            // $('#div4').show();
+            // 隐藏 -> 显示show()   显示 -> 隐藏hide()
+            // 参数 true -> 显示show()    false -> -> 隐藏hide()
+            // $('#div4').toggle();
+            // $('#div4').toggle(true);
+
+
+        })
+    </script>
+</head>
+<body>
+    <!-- <div id="div2" style="color: red; background: brown;">div2</div>
+    <div id="div3">div3</div> -->
+    <div id="div4">div4</div>
+</body>
+</html>

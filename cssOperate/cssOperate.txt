@@ -1,0 +1,44 @@
+
+
+一些变量
+function vendorPropName( style, name ) {}
+function isHidden( elem, el ) {}
+function getStyles( elem ) {}
+function showHide( elements, show ) {}
+
+jQuery.fn.extend({
+	css,
+    show,
+    hide,
+    toggle,
+})
+//内部使用
+jQuery.extend({
+    cssHooks: {
+        opacity: {},
+        //通过each遍历添加
+        height: {},
+        width: {},
+        margin: {},
+        padding: {},
+        borderWidth: {},
+        //dom加载完后添加
+        marginRight: {},
+        top: {},
+        left: {}
+    },
+    cssNumber: {},
+    cssProps: {},
+    style,
+    css,
+})
+
+curCSS = function( elem, name, _computed ) {}
+function setPositiveNumber( elem, value, subtract ) {}
+function augmentWidthOrHeight( elem, name, extra, isBorderBox, styles ) {}
+function getWidthOrHeight( elem, name, extra ) {}
+function css_defaultDisplay( nodeName ) {}
+function actualDisplay( name, doc ) {}
+
+jQuery.expr.filters.hidden = function( elem ) {}
+jQuery.expr.filters.hidden = function( elem ) {}

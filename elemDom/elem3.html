@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // alert( $('#input2').val() );
+            // $('#input2').val('hi');
+            // alert( $('#input2').val() );
+
+
+            // valHooks：option、select、radio、checkbox
+
+            // alert( $('#r2').get(0).type); // radio
+            // alert( $('#r2').get(0).nodeName); // INPUT
+            // alert( $('#c2').get(0).type); // checkbox
+            // alert( $('#c2').get(0).nodeName); // INPUT
+
+            /*
+            // select标签加上multiple属性，type：select-multiple 多选框
+            alert( $('select').get(0).type); // select-one 单选框
+            // 由于此标签有两种情况，所以使用nodeName情况进行兼容性处理
+            alert( $('select').get(0).nodeName); // SELECT
+            */
+
+            // $('option')获取多个jq对象，通过eq获取其中一个对象
+            // 在jq对象中通过get获取dom对象
+            // alert( $('option').eq(0).get(0).type); // 获取不到值
+            // alert( $('option').eq(0).get(0).nodeName); // OPTION
+
+            // 若option设置value属性，则获取到value值 hello
+            // 若option未设置value属性，则获取option内容值 222  
+            // 但是ie低版本获取的值为空字符串，而不是222，所以低版本只能通过text属性来获取
+            alert( $('option').eq(0).get(0).value);
+
+            /*
+            总结：
+                option、select是通过nodeName进行兼容性处理
+                radio、checkbox是通过type进行兼容性处理
+            */
+        })
+    </script>
+</head>
+<body>
+    <input type="text" id="input2" value="hello">
+    <!-- <select multiple> -->
+    <select>
+        <!-- <option value="hello">222</option> -->
+        <option>222</option>
+        <option>333</option>
+        <option>444</option>
+    </select>
+    <input type="radio" id="r2">
+    <input type="checkbox" id="c2">
+</body>
+</html>

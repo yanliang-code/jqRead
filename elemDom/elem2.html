@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // 可批量添加class；在添加时，jq内部会去重
+            // $('#div2').addClass('box2 box5')
+            
+            // 可批量移除class；移除时，若移除class不在指定元素上，则无效
+            // $('#div2').removeClass('box2 box3')
+            // $('#div2').removeClass('box5')
+
+            // 可批量操作；若指定元素class中存在，删除；不存在，添加
+            // $('#div2').toggleClass('box2 box5');
+            // 若第二参数传入boolean的true，相当于直接调用addClass（只加不同的，相同的也不删）
+            // $('#div2').toggleClass('box2 box5', true);
+            // 若第二参数传入boolean的false，相当于直接调用removeClass（只删相同的，不相同的也不加）
+            // $('#div2').toggleClass('box2 box5', false);
+            
+            // 可同时判断多个class；指定元素class含有目标class，返回true；否则，返回false
+            // alert( $('#div2').hasClass('box2 box3') );
+
+            // 支持使用回调函数作为参数，index是当前元素在 与#div2匹配上的所有元素 的位置
+            // return结果为addClass函数添加的class名称
+            // 适用于一组指定元素添加不同class选择器的情况(可通过index进行区分)
+            // $('#div2').addClass(function(index){
+            //     return 'box' + index;
+            // });
+
+
+
+            // 情况一(|| 优先级大于等于 &&)：
+            // 先执行2 || 0  --> 2
+            // 2 && 3 --> 3
+            // 情况二(&& 优先级大于 ||)：√
+            // 先执行0 && 3 --> 0
+            // 2 || 0 --> 2
+            
+            // 总结：情况二是正确的
+            // alert(2 || 0 && 3)
+        })
+    </script>
+</head>
+<body>
+    <div id="div2" class="box2 box3">qqqqqqq</div>
+</body>
+</html>

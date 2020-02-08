@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // 判断当前jq对象是否包含指定属性的jq对象
+            // alert ($('div').is('.box'));
+            // alert ($('div:first').is('.box'));
+            // alert ($('div:last').is('.box')); 
+            // alert ($('div:first').is('div:last')); 
+
+            // 获取指定jq对象在它所在兄弟节点中的位置（从0开始）
+            // alert( $('#div2').index() );
+
+            // 指定jq对象在它所在父级元素的子级元素中的位置
+            // alert( $('#span2').index() );
+
+            // $('#span2')对象在$('span')对象们中的位置
+            // alert( $('#span2').index('span') );
+            // 支持反着写
+            // alert( $('span').index( $('#span2') ) );
+
+            // 指定jq对象的 所有祖先元素中离指定元素最近的(包括自己本身)并且有box选择器的元素 加边框
+            // $('#div2').closest('.box').css('border', '2px red solid');
+
+            // 第二个参数是查找范围，只接受dom元素 (.box与#parDiv在一个元素上无法选中，.box必须在#parDiv区域内部)
+            // 向上查找是发现是#parDiv，直接结束
+            $('#div2').closest('.box',$('#parDiv').get(0)).css('border', '2px red solid');
+        })
+    </script>
+</head>
+<body id="parDiv">
+    <!-- <div class="box"></div>
+    <div class=""></div> -->
+
+    <!-- <div>div<span>span</span>span</div>
+    <div id="div2">div2<span id="span2">span2</span></div>
+    <div>div<span>span</span> </div> -->
+
+    <div class="box" >父div
+        <div id="div2">子div</div>
+    </div>
+</body>
+</html>

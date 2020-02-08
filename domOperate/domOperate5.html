@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <script src="../jquery-2.0.3/jquery-2.0.3.js"></script>
+    <script>
+        $(function(){
+            // $('div').remove();
+            // 参数是筛选条件，类选择器box3，只会移除符合要求的元素
+            // $('div').remove('.box3');
+            // $('div').detach();
+
+            /*
+            $('div').click(function(){
+                alert(234);
+            });
+            // remove后的元素，再添加回去，相关事件以及缓存数据不再存在
+            // var $div = $('div').remove();
+            // detach后的元素，再添加回去，相关事件以及缓存数据仍会存在
+            var $div = $('div').detach();
+            $('body').append( $div );
+            */
+            
+            // $('div').empty();
+
+            /*
+            // 获取div下的文字内容
+            // console.log( $('div').text() );
+            // 在div下清空，把指定内容按文本方式解析进去
+            // $('div').text('<h2>标题</h2>')
+
+            // 获取div下的html内容
+            console.log( $('div').html() );
+            // 在div下清空，把指定内容按html方式解析进去
+            $('div').html('<h2>标题</h2>')
+            */
+
+            $('div').click(function(){
+                alert('div');
+            });
+            $('span').click(function(){
+                alert('span');
+            });
+            // 不传参数：不会克隆事件以及缓存数据
+            // var cloneDiv = $('div').clone();
+            // 一个参数：第二参数不传默认内部会把第二个参数与第一个参数保持一致
+            // true：会克隆事件以及缓存数据
+            // var cloneDiv = $('div').clone(true);
+            // 参数一为true：克隆指定元素的事件以及缓存数据
+            // 参数二为false：不可隆指定元素的后台元素的事件以及缓存数据
+            var cloneDiv = $('div').clone(true,false);
+            $('body').append( cloneDiv );
+        })
+    </script>
+</head>
+<body>
+    <div class="box2">div
+        <span>span
+            <p>p</p>
+        </span>
+        <!-- 
+            remove后，再添加时会再次执行
+            detach后，再添加时不会再次执行
+         -->
+        <!-- <script>alert(222)</script> -->
+    </div>
+    <!-- <div class="box3">div
+        <span>span
+            <p>p</p>
+        </span>
+    </div> -->
+    
+</body>
+</html>
